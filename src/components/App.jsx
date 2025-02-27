@@ -7,6 +7,7 @@ import Main from "./Main/Main";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
+import closeIcon from "../assets/X_mark.png";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -57,10 +58,10 @@ function App() {
         <h2 className="modal__title"> New garment</h2>
         <button
           type="button"
-          className="modal__close"
+          className="modal__close modal__close_img"
           onClick={closeActiveModal}
         >
-          CLOSE
+          <img src={closeIcon} alt="CLOSE" />
         </button>
         <label htmlFor="name" className="modal__label">
           Name{" "}
