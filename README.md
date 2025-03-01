@@ -1,5 +1,22 @@
 # React + Vite
 
+# WTWR (What to Wear)
+
+WTWR is a full-stack web application that helps users choose suitable clothing based on real-time weather data. The application fetches weather information from a Weather API and provides personalized recommendations for attire based on the current conditions. The front end of WTWR is built using React, following fundamental principles of component-based development, state management, and API integration.
+
+# Features
+
+- Fetches real-time weather data from an external Weather API.
+- Dynamically recommends appropriate clothing based on temperature and weather conditions.
+- User-friendly interface designed with React and modern UI principles.
+- Modular and reusable React components for better maintainability.
+- State management and API handling using React’s built-in hooks.
+
+# Technologies Used
+
+- Frontend: React, JavaScript (ES6+), CSS
+- API: Weather API for retrieving real-time weather data
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

@@ -1,8 +1,9 @@
 .page {
-background-color:#F3F3F3;
+  background-color: #f3f3f3;
+  font-family: Cabinet Grotesk, sans-serif;
 }
 
-.page_content{
-  max-width:1360px;
-  margin:0 auto;
+.page_content {
+  max-width: 1360px;
+  margin: 0 auto;
 }

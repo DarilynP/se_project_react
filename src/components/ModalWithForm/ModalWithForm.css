@@ -20,6 +20,11 @@
 .modal__title {
   margin: 0;
   margin-bottom: 24px;
+
+  height: 20px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
 }
 
 .modal__close {
@@ -28,17 +33,28 @@
   right: 28px;
   border: none;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../assets/X_mark.png");
+  background-color: transparent;
 }
 
 .modal__content {
   background-color: #fff;
   position: relative;
-  padding: 28px 28px 36px;
-  max-width: 496px;
   box-sizing: border-box;
-  width: 100%;
+  border-radius: 20px;
+  height: 610px;
+}
+
+.modal__content-add {
+  max-width: 498px;
+  position: relative;
+  padding: 28px 28px 36px;
+  box-sizing: border-box;
   border-radius: 20px;
   height: 436px;
+  width: 100%;
 }
 
 .modal__form {
@@ -46,9 +62,17 @@
   flex-direction: column;
 }
 
+.modal__label {
+  font-family: Cabinet Grotesk, sans-serif;
+}
+
 .modal__input {
   display: block;
   margin-bottom: 24px;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .modal__radio-buttons {
@@ -58,11 +82,11 @@
   flex-direction: column;
 }
 
-.modal__close_img {
+/* .modal__close_img {
   width: 20px;
   height: 20px;
   right: 28px;
-}
+} */
 
 .modal__submit {
   width: 124px;
@@ -70,8 +94,13 @@
   border-radius: 4px;
   gap: 8px;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.3);
   margin-top: 32px;
+  border: none;
+  background-color: #000000;
+}
+
+.modal__submit:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal__submit:disabled {

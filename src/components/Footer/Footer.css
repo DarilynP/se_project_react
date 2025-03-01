@@ -1,0 +1,11 @@
+.footer {
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(243, 243, 243, 1);
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}

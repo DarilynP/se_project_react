@@ -9,10 +9,14 @@ function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
         activeModal === "add-garment" ? "modal__opened" : ""
       }`}
     >
-      <div className="modal__content">
+      <div className="modal__content modal__content-add">
         <h2 className="modal__title">{title}</h2>
-        <button onClick={onClose} type="button" className="modal__close">
-          CLOSE
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close modal__close_img"
+        >
+          {/* <img src={closeIcon} alt="CLOSE" /> */}
         </button>
 
         <form className="modal__form">

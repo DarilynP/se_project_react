@@ -10,10 +10,14 @@
 .card__name {
   position: absolute;
   top: 14px;
-  margin: 0;
   background-color: #ffffff;
-  padding: 2px, 12px;
+  padding: 2px 12px;
   color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: table;
 }
 .card__image {
   width: 100%;

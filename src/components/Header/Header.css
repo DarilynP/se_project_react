@@ -1,8 +1,8 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 32px 0 28px;
-  font-family: Cabinet Grotesk, sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24.8px;
@@ -12,15 +12,26 @@
   gap: 24px;
 }
 
+.header__logo-date {
+  display: flex;
+  align-items: center;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+
 .header__date-and-location {
   margin: 0;
 }
 
-.header__add-clothes-btn {
-  margin: 0 20px 0 auto;
-  background-color: transparent;
+.header__button-add {
+  line-height: 24px;
   border: none;
-  gap: 20px;
+  background: none;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .header__user-container {
