@@ -54,8 +54,9 @@ function App() {
       <ModalWithForm
         title="New Garment"
         buttonText="Add Garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
+        className="modal__content-container"
       >
         {/* <h2 className="modal__title"> New garment</h2>
         <button

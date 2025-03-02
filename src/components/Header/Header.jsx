@@ -7,6 +7,8 @@ function Header({ handleAddClick, weatherData }) {
     month: "long",
     day: "numeric",
   });
+
+
   return (
     <header className="header">
       <div className="header__logo-date">
