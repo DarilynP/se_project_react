@@ -29,14 +29,19 @@
 
 .modal__close {
   position: absolute;
-  top: 20px;
-  right: 28px;
+  top: 24px;
+  right: 24px;
   border: none;
   cursor: pointer;
   width: 40px;
   height: 40px;
-  background-image: url("../../assets/X_mark.png");
+  background-image: url("../../assets/X_mark-white.svg");
+  background-repeat: no-repeat;
   background-color: transparent;
+}
+
+.modal__close_garmet {
+  background-image: url("../../assets/X_mark.png");
 }
 
 .modal__content {
@@ -62,8 +67,8 @@
   flex-direction: column;
 }
 
-.modal__label {
-  font-family: Cabinet Grotesk, sans-serif;
+.modal__label_type_radio {
+  margin-top: 8px;
 }
 
 .modal__input {
@@ -80,13 +85,13 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
-/* .modal__close_img {
-  width: 20px;
-  height: 20px;
-  right: 28px;
-} */
+.modal__image {
+  border-style: none;
+  border-radius: 10px 10px 0 0;
+}
 
 .modal__submit {
   width: 124px;

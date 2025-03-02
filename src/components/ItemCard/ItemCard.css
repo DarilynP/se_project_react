@@ -18,6 +18,9 @@
   right: 0;
   margin: auto;
   display: table;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
 }
 .card__image {
   width: 100%;

@@ -1,0 +1,14 @@
+.modal__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.modal__caption {
+  margin: 0;
+}
+
+.modal__weather {
+  margin: 0;
+}
