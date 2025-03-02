@@ -46,6 +46,9 @@
   top: 28px;
   border: none;
   right: 28px;
+  width: 22px;
+  height: 19px;
+  background-color: transparent;
 }
 
 .modal__content {
