@@ -8,7 +8,8 @@ function ModalWithForm({
   isOpen,
   onClose,
   className = "",
-}) {
+  onSubmit
+})  {
   console.log("Active Modal:", activeModal);
 
   return (
@@ -18,12 +19,12 @@ function ModalWithForm({
         <button
           onClick={onClose}
           type="button"
-          className="modal__close-btn" 
+          className="modal__close-btn"
         >
           {/* <img src={closeIcon} alt="CLOSE" /> */}
         </button>
 
-        <form className="modal__form">
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
           <button type="submit" className="modal__submit">
             {buttonText}
