@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getItems } from "../utils/api";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
 import Header from "./Header/Header";
@@ -37,6 +38,7 @@ function App() {
   };
 
   const handleCardClick = (card) => {
+    console.log("card clicked", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -47,6 +49,7 @@ function App() {
   };
 
   const closeActiveModal = () => {
+    console.log("closing modal...");
     setActiveModal("");
   };
 
@@ -60,6 +63,46 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    console.log("Current activeModal:", activeModal);
+  }, [activeModal]);
+
+  const handleAddItem = (newItem) => {
+    fetch("http://localhost:3001/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    })
+      .then((res) => res.json())
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [...prevItems, addedItem]);
+      })
+      .catch(console.error);
+  };
+
+  const handleDeleteItem = (id) => {
+    fetch(`http://localhost:3001/items/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item.id !== id)
+        );
+      })
+      .catch(console.error);
+  };
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -90,6 +133,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
+            onAddItem={handleAddItem}
           />
           <ItemModal
             isOpen={activeModal === "preview"}

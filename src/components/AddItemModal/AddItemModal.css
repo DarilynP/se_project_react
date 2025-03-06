@@ -1,0 +1,3 @@
+.modal__opened {
+  display: block; /* Show the modal when this class is added */
+}

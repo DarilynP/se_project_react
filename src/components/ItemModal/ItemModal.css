@@ -12,3 +12,7 @@
 .modal__weather {
   margin: 0;
 }
+
+.modal__opened {
+  display: block;
+}

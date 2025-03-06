@@ -4,23 +4,18 @@ function ModalWithForm({
   children,
   buttonText,
   title,
-  activeModal,
   isOpen,
   onClose,
   className = "",
-  onSubmit
-})  {
-  console.log("Active Modal:", activeModal);
+  onSubmit,
+}) {
+  console.log("isOpen:", isOpen);
 
   return (
     <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
       <div className={`modal__content ${className}`}>
         <h2 className="modal__title">{title}</h2>
-        <button
-          onClick={onClose}
-          type="button"
-          className="modal__close-btn"
-        >
+        <button onClick={onClose} type="button" className="modal__close-btn">
           {/* <img src={closeIcon} alt="CLOSE" /> */}
         </button>
 
