@@ -1,0 +1,21 @@
+.clothes-section__items {
+  display: flex;
+  max-width: 1015px;
+  flex-wrap: wrap;
+  gap: 21px;
+}
+.clothes-section > div {
+  display: flex;
+}
+
+.clothes-section button {
+  border: none;
+  background-color: transparent;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.clothes-section p {
+  margin-left: 20px;
+  font-size: 20px;
+}

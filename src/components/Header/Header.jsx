@@ -32,11 +32,7 @@ function Header({ handleAddClick, weatherData, username }) {
         <Link to="/profile" className="header__link">
           <div className="header__profile">
             <div className="header__username">{username}</div>
-            <img
-              src={avatar || avatarDefault}
-              alt="user avatar"
-              className="header__avatar"
-            />
+            <img src={avatar} alt="user avatar" className="header__avatar" />
           </div>
           <span className="header__avatar header__Avatar_none">
             {username?.toUpperCase().charAt(0) || ""}

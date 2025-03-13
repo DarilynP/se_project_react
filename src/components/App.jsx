@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { getItems } from "../utils/api";
+import api from "../utils/api";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
 import Header from "./Header/Header";
@@ -14,6 +14,8 @@ import CurrentTemperatureUnitContext from "../components/context/CurrentTemperat
 import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
+import ConfirmDeleteModal from "./ConfirmDeleteModal/ConfirmDeleteModal";
+import ClothingSection from "./ClothingSection/ClothingSection";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -29,6 +31,13 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+  //delete state
+
+  const [cardToDelete, setCardToDelete] = useState(null); // Stores the card that will be deleted
+
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false); // For ItemModal
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false); // Controls the confirmation modal
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "F") {
       setCurrentTemperatureUnit("C");
@@ -39,8 +48,8 @@ function App() {
 
   const handleCardClick = (card) => {
     console.log("card clicked", card);
-    setActiveModal("preview");
-    setSelectedCard(card);
+    setSelectedCard(card); // Set the selected card to be shown in the modal
+    setIsItemModalOpen(true); // Open the modal
   };
 
   const handleAddClick = () => {
@@ -48,24 +57,58 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  // const handleModalDeleteItem = (id) => {
+  //   setClothingItems((prevItems) =>
+  //     prevItems.filter((item) => item._id !== cardToDelete._id)
+  //   );
+  // };
+
+  const handleDeleteItem = (id) => {
+    console.log("Deleting item with ID:", id);
+    fetch(`http://localhost:3001/items/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== id)
+        );
+        setIsConfirmModalOpen(false);
+      })
+      .catch(console.error);
+  };
+
   const closeActiveModal = () => {
     console.log("closing modal...");
     setActiveModal("");
   };
 
+  const handleDeleteClick = (id) => {
+    setCardToDelete(card); // Store the card to delete
+    setIsConfirmModalOpen(true); // Open confirmation modal
+    console.log("isConfirmModalOpen", isConfirmModalOpen);
+  };
+
+  const confirmDelete = () => {
+    setClothingItems(
+      (prevItems) => prevItems.filter((item) => item.id !== cardToDelete) // Correct logic for deleting the item
+    );
+    setIsConfirmModalOpen(false); // Close the modal
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        console.log("Weather Data:", data); // Log the raw data
+        console.log("Weather Data:", data);
         const filteredData = filterWeatherData(data);
-        console.log("Filtered Data:", filteredData); // Log the filtered data
+        console.log("Filtered Data:", filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    getItems()
+    api
+      .getItems() // Use api.getItems() if it's part of your API module
       .then((data) => {
         console.log(data);
         setClothingItems(data);
@@ -91,15 +134,35 @@ function App() {
       })
       .catch(console.error);
   };
+  // const handleDeleteItem = (id) => {
+  //   console.log("Deleting item with ID:", id);
+  //   fetch(`http://localhost:3001/items/${id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then(() => {
+  //       setClothingItems((prevItems) =>
+  //         prevItems.filter((item) => item._id !== id)
+  //       );
+  //       setIsConfirmModalOpen(false);
+  //     })
+  //     .catch(console.error);
+  // };
 
-  const handleDeleteItem = (id) => {
-    fetch(`http://localhost:3001/items/${id}`, {
+  const handleCardDelete = () => {
+    if (!cardToDelete || !cardToDelete._id) {
+      console.error("No valid item selected for deletion.");
+      return;
+    }
+    fetch(`http://localhost:3001/items/${cardToDelete._id}`, {
       method: "DELETE",
     })
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== id)
+          prevItems.filter((item) => item._id !== cardToDelete._id)
         );
+        setCardToDelete(null);
+        setIsConfirmModalOpen(false);
+        setIsItemModalOpen(false);
       })
       .catch(console.error);
   };
@@ -125,7 +188,13 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile onCardClick={handleCardClick} />}
+                element={
+                  <Profile
+                    onCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                }
               />
             </Routes>
             <Footer />
@@ -136,9 +205,18 @@ function App() {
             onAddItem={handleAddItem}
           />
           <ItemModal
-            isOpen={activeModal === "preview"}
-            card={selectedCard}
-            onClose={closeActiveModal}
+            isOpen={isItemModalOpen}
+            onClose={() => setIsItemModalOpen(false)}
+            card={selectedCard} // ✅ Pass the selected card as a prop
+            onDelete={handleDeleteItem} // Ensure this prop is passed
+            setCardToDelete={setCardToDelete}
+            setIsConfirmModalOpen={setIsConfirmModalOpen}
+          />
+
+          <ConfirmDeleteModal
+            isOpen={isConfirmModalOpen}
+            onClose={() => setIsConfirmModalOpen(false)} // Close modal without deleting
+            onConfirm={handleCardDelete}
           />
         </div>
       </BrowserRouter>

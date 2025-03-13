@@ -14,5 +14,56 @@
 }
 
 .modal__opened {
-  display: block;
+  display: flex;
+}
+
+/* .modal__content {
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: 610px;
+  max-width: 496px;
+  width: 100%;
+} */
+
+.modal__content_type_image {
+  max-height: 610px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal_type_image {
+}
+
+.modal__delete-button {
+  color: rgba(255, 77, 0, 1);
+  width: 101px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: right;
+  position: absolute;
+  left: 355px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../assets/X_mark-white.svg");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.modal__close-item {
 }

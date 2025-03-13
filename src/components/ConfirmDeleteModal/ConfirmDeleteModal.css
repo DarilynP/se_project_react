@@ -1,0 +1,65 @@
+.modal {
+  font-family: Cabinet Grotesk, sans-serif;
+}
+
+.modal__title-confirmModal {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  position: relative;
+  margin-top: 60px;
+}
+
+.modal__subtitle-confirm {
+  margin-top: 0;
+}
+
+.modal__content-confirm {
+  width: 670px;
+  height: 280px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc; /* Light border */
+  background-color: #fff;
+}
+
+.modal__buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 24px;
+}
+
+.modal__confirm-button {
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(255, 77, 0, 1);
+  background-color: transparent;
+  border: none;
+
+}
+.modal__cancel-button {
+  font-size: 20px;
+  line-height: 24px;
+  color: black;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 60px;
+
+}
+.modal__close-confirm {
+  position: absolute;
+  background: none;
+  color: red;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin: 20px;
+}
+
+.modal__opened {
+  visibility: visible;
+}

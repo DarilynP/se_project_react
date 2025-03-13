@@ -2,7 +2,7 @@ import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function AddItemModal({ onClose, isOpen }) {
+export default function AddItemModal({ onClose, isOpen, onAddItem }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
@@ -20,16 +20,20 @@ export default function AddItemModal({ onClose, isOpen }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Corrected this line
-    console.log("submit the add-item modal");
-    // update clothing items array
-    //close the modal
-    //empty the inputs
+    e.preventDefault();
+    const newItem = { name, imageUrl, weather };
+    console.log("Adding new item:", newItem);
+    onAddItem(newItem); // Pass new item up to parent component
+    setName("");
+    setImageUrl("");
+    setWeather("");
   };
+
 
   return (
     <ModalWithForm
       title="New Garment"
+      name="new-card"
       buttonText="Add Garment"
       isOpen={isOpen}
       onClose={onClose}

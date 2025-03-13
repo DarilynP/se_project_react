@@ -1,26 +1,26 @@
-import { defaultClothingItems } from "../../utils/constants";
-
-function ClothingSection(onCardClick) {
+import ItemCard from "../ItemCard/ItemCard"; // Import the ItemCard component
+import "./ClothingSection.css";
+function ClothingSection({
+  clothingItems,
+  weatherData,
+  onCardClick,
+  handleAddClick,
+}) {
   return (
     <div className="clothes-section">
       <div>
-        <p> Your items</p>
-        <button> +Add New </button>
+        <p>Your items</p>
+        <button onClick={handleAddClick}>+ Add New </button>
       </div>
       <ul className="clothes-section__items">
         {clothingItems
-          .filter((item) => {
-            return item.weather === weatherData.type;
-          })
-
+          // .filter((item) => item.weather === weatherData.type) // Filtering based on weatherData
           .map((item) => {
             return (
               <ItemCard
                 key={item._id}
                 item={item}
-                // onCardClick={handleCardClick}
-               // todo- pass as prop
-               //oncardclick={oncardclick}
+                onCardClick={onCardClick} // Pass the onCardClick prop down to ItemCard
               />
             );
           })}
