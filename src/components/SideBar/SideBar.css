@@ -1,11 +1,9 @@
 .sideBar {
   display: flex;
   justify-content: space-between;
+  margin-right: 116px;
 }
-
-
 
 .sideBar__username {
   margin-left: 20px;
-  margin-right: 116px;
 }
