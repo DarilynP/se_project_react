@@ -1,3 +1,21 @@
 .profile {
   display: flex;
 }
+
+.profile_sideBar {
+}
+
+.profile__username {
+}
+
+.profile__clothing-item {
+}
+
+/* .modal__image-profile {
+  border-style: none;
+  border-radius: 10px 10px 0 0;
+  max-width: 100%;
+  height: 436px;
+  display: block;
+  margin: 0 auto;
+} */

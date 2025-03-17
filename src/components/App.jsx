@@ -131,6 +131,7 @@ function App() {
       .then((res) => res.json())
       .then((addedItem) => {
         setClothingItems((prevItems) => [...prevItems, addedItem]);
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -174,7 +175,11 @@ function App() {
       <BrowserRouter>
         <div className="page">
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              username={"User name"}
+            />
             <Routes>
               <Route
                 path="/"
@@ -193,6 +198,7 @@ function App() {
                     onCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleAddClick={handleAddClick}
+                    username={"User name"}
                   />
                 }
               />

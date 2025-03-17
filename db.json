@@ -23,6 +23,42 @@
       "imageUrl": "https://pettownsendvet.com/wp-content/uploads/2023/01/iStock-1052880600.jpg",
       "weather": "hot",
       "_id": 9
+    },
+    {
+      "name": "cap",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
+      "weather": "hot",
+      "_id": 10
+    },
+    {
+      "name": "Hoodie",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "cold",
+      "_id": 11
+    },
+    {
+      "name": "coat",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
+      "weather": "cold",
+      "_id": 12
+    },
+    {
+      "name": "test",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
+      "weather": "cold",
+      "_id": 13
+    },
+    {
+      "name": "test",
+      "imageUrl": "https://us.aym-studio.com/cdn/shop/files/AYMstudioJunimaxidressblackversatile.jpg?v=1736175986",
+      "weather": "hot",
+      "_id": 14
+    },
+    {
+      "name": "T-Shirt",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
+      "weather": "hot",
+      "_id": 15
     }
   ]
 }
