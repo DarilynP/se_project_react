@@ -10,7 +10,7 @@ import ItemModal from "./ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
 import closeIcon from "../assets/X_mark.png";
 import Footer from "./Footer/Footer";
-import CurrentTemperatureUnitContext from "../components/context/CurrentTemperatureUnit";
+import CurrentTemperatureUnitContext from "../utils/context/CurrentTemperatureUnit";
 import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
