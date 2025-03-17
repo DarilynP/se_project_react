@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import ClothingSection from "../ClothingSection/ClothingSection";
+import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit";
+
+
+
+
+
 import SideBar from "../SideBar/SideBar";
 
 function Profile({ onCardClick, clothingItems, handleAddClick }) {

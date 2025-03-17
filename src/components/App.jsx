@@ -10,12 +10,16 @@ import ItemModal from "./ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
 import closeIcon from "../assets/X_mark.png";
 import Footer from "./Footer/Footer";
-import CurrentTemperatureUnitContext from "../utils/context/CurrentTemperatureUnit";
+// import CurrentTemperatureUnitContext from "../components/context/CurrentTemperatureUnit";
 import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
 import ConfirmDeleteModal from "./ConfirmDeleteModal/ConfirmDeleteModal";
 import ClothingSection from "./ClothingSection/ClothingSection";
+import CurrentTemperatureUnitContext from "../utils/CurrentTemperatureUnit";
+
+
+
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -175,11 +179,7 @@ function App() {
       <BrowserRouter>
         <div className="page">
           <div className="page__content">
-            <Header
-              handleAddClick={handleAddClick}
-              weatherData={weatherData}
-              username={"User name"}
-            />
+            <Header handleAddClick={handleAddClick} weatherData={weatherData} username={"User name"}/>
             <Routes>
               <Route
                 path="/"
