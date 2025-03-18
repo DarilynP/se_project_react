@@ -1,6 +1,6 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AddItemModal({ onClose, isOpen, onAddItem }) {
   const [name, setName] = useState("");
@@ -19,17 +19,29 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
     setWeather(e.target.value);
   };
 
+  // Reset form when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    }
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = { name, imageUrl, weather };
     console.log("Adding new item:", newItem);
-    onAddItem(newItem); // Pass new item up to parent component
-    setName("");
-    setImageUrl("");
-    setWeather("");
+
+    onAddItem(newItem)
+      .then(() => {
+        // Clear fields only on successful submission
+        setName("");
+        setImageUrl("");
+        setWeather("");
+      })
+      .catch((err) => console.error("Error adding item:", err));
   };
-
-
   return (
     <ModalWithForm
       title="New Garment"

@@ -16,8 +16,7 @@ import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
 import ConfirmDeleteModal from "./ConfirmDeleteModal/ConfirmDeleteModal";
 import ClothesSection from "./ClothesSection/ClothesSection";
-import CurrentTemperatureUnitContext from "../utils/CurrentTemperatureUnit";
-
+import CurrentTemperatureUnitContext from "../context/CurrentTemperatureUnit";
 
 
 
@@ -90,13 +89,6 @@ function App() {
     setCardToDelete(card); // Store the card to delete
     setIsConfirmModalOpen(true); // Open confirmation modal
     console.log("isConfirmModalOpen", isConfirmModalOpen);
-  };
-
-  const confirmDelete = () => {
-    setClothingItems(
-      (prevItems) => prevItems.filter((item) => item.id !== cardToDelete) // Correct logic for deleting the item
-    );
-    setIsConfirmModalOpen(false); // Close the modal
   };
 
   useEffect(() => {
@@ -179,7 +171,11 @@ function App() {
       <BrowserRouter>
         <div className="page">
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} username={"User name"}/>
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              username={"User name"}
+            />
             <Routes>
               <Route
                 path="/"

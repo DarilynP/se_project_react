@@ -1,26 +1,38 @@
 const baseURL = "http://localhost:3001";
 
+// Function to check if the response is OK
+export function checkResponse(res) {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
+}
+
+// Generalized request function
+function request(url, options) {
+  return fetch(url, options).then(checkResponse);
+}
+
 // Fetch all items (GET /items)
 export const getItems = () => {
-  return fetch(`${baseURL}/items`)
-    .then((res) => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
+  return request(`${baseURL}/items`);
 };
 
 // Add a new item (POST /items)
 export const addItem = (name, imageUrl, weather) => {
-  return fetch(`${baseURL}/items`, {
+  return request(`${baseURL}/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, imageUrl, weather }),
-  }).then((res) => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
+  });
 };
 
 // Remove an item (DELETE /items/:id)
 export const removeItem = (id) => {
-  return fetch(`${baseURL}/items/${id}`, {
+  return request(`${baseURL}/items/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-  }).then((res) => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
+  });
 };
 
 // Export all functions

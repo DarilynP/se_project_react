@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit";
-
-
-
-
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit";
 
 import SideBar from "../SideBar/SideBar";
 
