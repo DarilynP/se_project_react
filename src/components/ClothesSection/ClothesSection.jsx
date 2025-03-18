@@ -1,6 +1,6 @@
 import ItemCard from "../ItemCard/ItemCard"; // Import the ItemCard component
-import "./ClothingSection.css";
-function ClothingSection({
+import "./ClothesSection.css";
+function ClothesSection({
   clothingItems,
   weatherData,
   onCardClick,
@@ -29,4 +29,4 @@ function ClothingSection({
   );
 }
 
-export default ClothingSection;
+export default ClothesSection;

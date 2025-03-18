@@ -15,7 +15,7 @@ import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../utils/constants";
 import Profile from "./Profile/Profile";
 import ConfirmDeleteModal from "./ConfirmDeleteModal/ConfirmDeleteModal";
-import ClothingSection from "./ClothingSection/ClothingSection";
+import ClothesSection from "./ClothesSection/ClothesSection";
 import CurrentTemperatureUnitContext from "../utils/CurrentTemperatureUnit";
 
 

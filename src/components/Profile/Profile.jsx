@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import ClothingSection from "../ClothingSection/ClothingSection";
+import ClothesSection from "../ClothesSection/ClothesSection";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit";
 
 
@@ -24,7 +24,7 @@ function Profile({ onCardClick, clothingItems, handleAddClick }) {
         <SideBar />
       </section>
       <section className="profile__clothing-item">
-        <ClothingSection
+        <ClothesSection
           clothingItems={clothingItems}
           onCardClick={onCardClick}
           handleAddClick={handleAddClick}
