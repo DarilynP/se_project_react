@@ -20,11 +20,11 @@ export const getItems = () => {
 };
 
 // Add a new item (POST /items)
-export const addItem = (name, imageUrl, weather) => {
+export const addItem = (item) => {
   return request(`${baseURL}/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, imageUrl, weather }),
+    body: JSON.stringify(item),
   });
 };
 
