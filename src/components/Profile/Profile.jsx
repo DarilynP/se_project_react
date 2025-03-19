@@ -5,7 +5,7 @@ import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit"
 
 import SideBar from "../SideBar/SideBar";
 
-function Profile({ onCardClick, clothingItems, handleAddClick }) {
+function Profile({ onCardClick, clothingItems, handleAddClick, }) {
   // const [clothingItems, setClothingItems] = useState([
   // //   {
   // //     name: "Test",

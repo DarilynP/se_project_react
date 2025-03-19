@@ -1,12 +1,13 @@
 const baseURL = "http://localhost:3001";
 
 // Function to check if the response is OK
-export function checkResponse(res) {
-  if (!res.ok) {
+export const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
     return Promise.reject(`Error: ${res.status}`);
   }
-  return res.json();
-}
+};
 
 // Generalized request function
 function request(url, options) {

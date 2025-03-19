@@ -7,17 +7,9 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-
-  const handleWeatherChange = (e) => {
-    setWeather(e.target.value);
-  };
+  const handleNameChange = (e) => setName(e.target.value);
+  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
+  const handleWeatherChange = (e) => setWeather(e.target.value);
 
   // Reset form when modal opens
   useEffect(() => {
@@ -32,16 +24,9 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
     e.preventDefault();
     const newItem = { name, imageUrl, weather };
     console.log("Adding new item:", newItem);
-
-    onAddItem(newItem)
-      .then(() => {
-        // Clear fields only on successful submission
-        setName("");
-        setImageUrl("");
-        setWeather("");
-      })
-      .catch((err) => console.error("Error adding item:", err));
+    onAddItem(newItem).catch((err) => console.error("Error adding item:", err));
   };
+
   return (
     <ModalWithForm
       title="New Garment"
@@ -61,8 +46,8 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
           required
           minLength="1"
           maxLength="30"
-          onChange={handleNameChange} // Use the external handler
-          value={name} // Bind the input to the state
+          onChange={handleNameChange}
+          value={name}
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -78,7 +63,7 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
         />
       </label>
       <fieldset className="modal__radio-buttons">
-        <legend className="modal__legend"> Select the weather type:</legend>
+        <legend className="modal__legend">Select the weather type:</legend>
         <label htmlFor="hot" className="modal__label modal__label_type_radio">
           <input
             id="hot"

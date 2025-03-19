@@ -1,5 +1,7 @@
-import ItemCard from "../ItemCard/ItemCard"; // Import the ItemCard component
+import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
+import React from "react";
+
 function ClothesSection({
   clothingItems,
   weatherData,
@@ -21,6 +23,7 @@ function ClothesSection({
                 key={item._id}
                 item={item}
                 onCardClick={onCardClick} // Pass the onCardClick prop down to ItemCard
+              
               />
             );
           })}
