@@ -70,10 +70,9 @@ function App() {
   const handleAddItem = (newItem) => {
     addItem(newItem)
       .then((addedItem) => {
-        setClothingItems((prevItems) => [...prevItems, addedItem]);
-        closeActiveModal();
+        setClothingItems((prevItems) => [addedItem, ...prevItems]);
       })
-      .catch(console.error);
+      .catch((err) => console.error(err));  
   };
 
   useEffect(() => {

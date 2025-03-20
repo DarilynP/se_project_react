@@ -24,7 +24,7 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
     e.preventDefault();
     const newItem = { name, imageUrl, weather };
     console.log("Adding new item:", newItem);
-    onAddItem(newItem).catch((err) => console.error("Error adding item:", err));
+    onAddItem(newItem);
   };
 
   return (
