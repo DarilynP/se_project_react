@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getItems, addItem, removeItem } from "../utils/api";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
@@ -50,6 +50,10 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
+    if (!id) {
+      console.error("❌ Error: ID is undefined!");
+      return;
+  }
     console.log("Deleting item with ID:", id);
 
     removeItem(id)
@@ -57,22 +61,28 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
         );
+
         setIsConfirmModalOpen(false);
+        setCardToDelete(null);
+        closeActiveModal(); // Ensures all modals close
       })
       .catch(console.error);
   };
 
   const closeActiveModal = () => {
-    console.log("closing modal...");
+    console.log("Closing all modals...");
     setActiveModal("");
+    setIsItemModalOpen(false);
+    setIsConfirmModalOpen(false);
   };
 
   const handleAddItem = (newItem) => {
     addItem(newItem)
       .then((addedItem) => {
         setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        closeActiveModal();
       })
-      .catch((err) => console.error(err));  
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -80,8 +90,6 @@ function App() {
       .then((items) => setClothingItems(items))
       .catch(console.error);
   }, []);
-
-
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -98,23 +106,23 @@ function App() {
     console.log("Current activeModal:", activeModal);
   }, [activeModal]);
 
-  const handleCardDelete = () => {
-    if (!cardToDelete || !cardToDelete._id) {
-      console.error("No valid item selected for deletion.");
-      return;
-    }
+  // const handleCardDelete = () => {
+  //   if (!cardToDelete || !cardToDelete._id) {
+  //     console.error("No valid item selected for deletion.");
+  //     return;
+  //   }
 
-    removeItem(cardToDelete._id)
-      .then(() => {
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== cardToDelete._id)
-        );
-        setCardToDelete(null);
-        setIsConfirmModalOpen(false);
-        setIsItemModalOpen(false);
-      })
-      .catch(console.error);
-  };
+  //   removeItem(cardToDelete._id)
+  //     .then(() => {
+  //       setClothingItems((prevItems) =>
+  //         prevItems.filter((item) => item._id !== cardToDelete._id)
+  //       );
+  //       setCardToDelete(null);
+  //       setIsConfirmModalOpen(false);
+  //       setIsItemModalOpen(false);
+  //     })
+  //     .catch(console.error);
+  // };
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -170,7 +178,7 @@ function App() {
           <ConfirmDeleteModal
             isOpen={isConfirmModalOpen}
             onClose={() => setIsConfirmModalOpen(false)}
-            onConfirm={handleCardDelete}
+            onConfirm={() => handleDeleteItem(cardToDelete?._id)}
           />
         </div>
       </BrowserRouter>
