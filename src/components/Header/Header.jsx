@@ -1,14 +1,47 @@
+import React, { useState, useContext } from "react";
 import "./Header.css";
 import logo from "../../assets/Logo.png";
 import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import RegisterModal from "../RegisterModal/RegisterModal"; // Import RegisterModal
 
-function Header({ handleAddClick, weatherData, username }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  handleLoginClick,
+  isLoggedIn,
+  handleRegisterClick,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
+  // State to manage which modal is active
+  const [activeModal, setActiveModal] = useState(null);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  // Function to close modal
+  const closeActiveModal = () => {
+    setActiveModal(null);
+  };
+
+  // Register function
+  const handleRegister = (formData) => {
+    console.log("Registering with data: ", formData);
+    closeActiveModal();
+  };
+
+  // Login function (to be passed to LoginModal)
+  const handleLogin = (formData) => {
+    console.log("Logging in with data: ", formData);
+    closeActiveModal();
+  };
+
+  console.log("activeModal", activeModal);
 
   return (
     <header className="header">
@@ -30,17 +63,23 @@ function Header({ handleAddClick, weatherData, username }) {
           + Add clothes
         </button>
 
-        <Link to="/profile" className="header__link">
-          <div className="header__profile">
-          <div className="header__username">{username}</div>
-            <img src={avatar} alt="user avatar" className="header__avatar" />
-
-          </div>
-          {/* <span className="header__avatar header__Avatar_none">
-            {username?.toUpperCase().charAt(0) || ""}
-          </span> */}
-        </Link>
+        {currentUser ? (
+          <Link to="/profile" className="header__link">
+            <div className="header__profile">
+              <div className="header__username">{currentUser.username}</div>
+              <img src={avatar} alt="user avatar" className="header__avatar" />
+            </div>
+          </Link>
+        ) : (
+          <>
+            <button type="button" onClick={handleRegisterClick}>
+              Sign up
+            </button>
+            <button onClick={() => handleLoginClick()}>Login</button>
+          </>
+        )}
       </div>
+
     </header>
   );
 }

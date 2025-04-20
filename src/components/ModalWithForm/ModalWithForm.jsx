@@ -19,15 +19,17 @@ function ModalWithForm({
       <div className={`modal__content ${className}`}>
         <h2 className="modal__title">{title}</h2>
         <button onClick={onClose} type="button" className="modal__close-btn">
-          {/* <img src={closeIcon} alt="CLOSE" /> */}
+          {/* Close icon or button */}
         </button>
 
-        <form onSubmit={onSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
-        </form>
+        {/* Children are injected here. The form should be handled by the parent component. */}
+        <div className="modal__form">
+          {children} 
+        </div>
+
+        <button type="submit" className="modal__submit">
+          {buttonText}
+        </button>
       </div>
     </div>
   );

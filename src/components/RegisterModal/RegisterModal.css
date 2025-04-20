@@ -1,0 +1,55 @@
+/* .modal {
+    position: fixed;
+    width: 496px;
+    height: 304px;
+    top: 259px;
+    left: 472px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: white;
+  }
+   */
+  .register .modal__title{
+    position: fixed;
+  width: 41px;
+  height: 20px;
+  top: 287px;
+  left: 500px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+
+  }
+  .register .modal__content{
+    background-color: #fff;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 20px;
+    max-width: 496px;
+    width: 100%;
+    max-height: 436px;
+    padding: 28px;
+  }
+
+  .register .modal__close{
+    background-image: url("../../assets/X_mark-white.svg");
+  position: absolute;
+  top: 28px;
+  border: none;
+  right: 28px;
+  width: 22px;
+  height: 19px;
+  background-color: transparent;
+}
+  
+.modal__registration-submit{
+    position: fixed;
+    width: 158px;
+    height: 36px;
+    top: 491px;
+    left: 500px;
+    border-radius: 4px;
+}
+

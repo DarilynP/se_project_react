@@ -1,6 +1,8 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 import React from "react";
+import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
 function ClothesSection({
   clothingItems,
@@ -23,7 +25,6 @@ function ClothesSection({
                 key={item._id}
                 item={item}
                 onCardClick={onCardClick} // Pass the onCardClick prop down to ItemCard
-              
               />
             );
           })}

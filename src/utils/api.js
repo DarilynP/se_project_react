@@ -39,3 +39,16 @@ export const removeItem = (id) => {
 // Export all functions
 const api = { getItems, addItem, removeItem };
 export default api;
+
+//register/
+export const register = async ({ name, avatar, email, password }) => {
+  const res = await fetch("/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, avatar, email, password }),
+  });
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return await res.json();
+};
