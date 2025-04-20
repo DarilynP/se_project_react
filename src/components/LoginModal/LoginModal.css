@@ -12,7 +12,11 @@
     border: 1px solid #ccc;
     z-index: 1000;
   }
-  
+  .modal__content .login-modal{
+    width: 496PX;
+    height: 304px;
+    border-radius: 20px;
+  }
   
   /* .modal__content {
     background-color: #fff;

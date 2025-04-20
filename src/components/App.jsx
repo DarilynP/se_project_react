@@ -19,6 +19,8 @@ import RegisterModal from "../components/RegisterModal/RegisterModal";
 import CurrentUserContext from "../context/CurrentUserContext.jsx";
 import { CurrentUserProvider } from "../context/CurrentUserContext.jsx";
 import { register } from "../utils/api";
+import LoginModal from "./LoginModal/LoginModal.jsx";
+
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -90,7 +92,7 @@ function App() {
   };
 
   const openLoginModal = () => {
-    console.log("login modal triggered")
+    console.log("login modal triggered");
     setActiveModal("login");
   };
 
@@ -280,11 +282,16 @@ function App() {
             />
 
             <RegisterModal
-              isOpen={activeModal === "register" || activeModal ==="login"}
+              isOpen={activeModal === "register"}
               onClose={closeActiveModal}
               onRegister={handleRegister}
               onLogin={handleLogin}
-              type={register}
+              type={activeModal}
+            />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              onClose={closeActiveModal}
+              onLogin={handleLogin}
             />
           </div>
         </BrowserRouter>

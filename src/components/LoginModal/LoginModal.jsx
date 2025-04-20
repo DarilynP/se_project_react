@@ -19,10 +19,10 @@ function LoginModal({ isOpen, onClose, onLogin }) {
       buttonText="Login"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}  
+      onSubmit={handleSubmit}
       className="login-modal"
     >
-      <form onSubmit={handleSubmit}>  
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
@@ -38,9 +38,9 @@ function LoginModal({ isOpen, onClose, onLogin }) {
           required
         />
         <button type="submit">Login</button>
-        <button type="button" onClick={onClose}>
+        {/* <button type="button" onClick={onClose}>
           Cancel
-        </button>
+        </button> */}
       </form>
     </ModalWithForm>
   );
