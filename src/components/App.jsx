@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { checkToken, handleSaveProfile } from "../utils/api";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { getItems, addItem, removeItem } from "../utils/api";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
@@ -20,6 +21,11 @@ import CurrentUserContext from "../context/CurrentUserContext.jsx";
 import { CurrentUserProvider } from "../context/CurrentUserContext.jsx";
 import { register } from "../utils/api";
 import LoginModal from "./LoginModal/LoginModal.jsx";
+import { login } from "../utils/api";
+import updatedUserData from "../utils/api";
+import { addCardLike, removeCardLike } from "../utils/api";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import * as api from "../utils/api";
 
 
 function App() {
@@ -41,24 +47,27 @@ function App() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const [currentUser, setCurrentUser] = useState(null);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
-  function handleRegister({ email, password }) {
+  function handleRegister({ email, password, avatar, name }) {
     console.log("Registering:", email, password);
     register({
-      name: "New User",
-      avatar: "",
+      name,
+      avatar,
       email,
       password,
     })
       .then(() => {
-        return handleLogin({ email, password });
+        return handleLogin({ email, password, avatar, name });
       })
       .catch((err) => console.error("registration error", err));
   }
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+
     setActiveModal("register");
   };
 
@@ -81,10 +90,22 @@ function App() {
     setActiveModal("register");
   };
 
-  const handleLogin = (data) => {
-    console.log("Logging in:", data);
-    // Handle login logic
-    setIsModalOpen(false); // Close modal after login
+  const handleLogin = ({ email, password }) => {
+    login({ email, password })
+      .then(({ token }) => {
+        localStorage.setItem("jwt", token);
+        if (token) {
+          checkToken(token).then((user) => {
+            setCurrentUser(user);
+            console.log("user set after login:", user);
+            setIsLoggedIn(true);
+            closeActiveModal();
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Login error:", err);
+      });
   };
 
   const openSignupModal = () => {
@@ -132,7 +153,8 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = ({ id, isLiked, currentUser }) => {
+    console.log(`Card ${id} has been ${isLiked ? "unliked" : "liked"}`);
     const token = localStorage.getItem("jwt");
     // Check if this card is not currently liked
     if (!isLiked) {
@@ -156,11 +178,33 @@ function App() {
     }
   };
 
+  console.log("Render check: isLoggedIn =", isLoggedIn);
+  console.log("Render check: currentUser =", currentUser);
+
   const handleSignOut = () => {
+    console.log("sign out clicked");
+    console.trace();
+    console.log("current user before signout:", currentUser);
     localStorage.removeItem("jwt"); // remove the token
     setIsLoggedIn(false); // update state to log out
-    setCurrentUser({}); // optional: clear user state
+    setCurrentUser(null); // optional: clear user state
   };
+
+  //delete item from server
+  // const deleteItem = (itemId) => {
+  //   api
+  //     .deleteItem(itemId)
+  //     .then(() => {
+  //       const updatedItems = clothingItems.filter(
+  //         (item) => item._id !== itemId
+  //       );
+  //       setClothingItems(updatedItems); // Update local state
+  //       setIsConfirmDeleteModalOpen(false); // Close delete confirmation modal if you have one
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error deleting item:", err);
+  //     });
+  // };
 
   useEffect(() => {
     getItems()
@@ -186,39 +230,33 @@ function App() {
   // Auto-login on load
   useEffect(() => {
     const token = localStorage.getItem("jwt");
+
     if (token) {
       checkToken(token)
         .then((user) => {
-          setCurrentUser(user);
-          setIsLoggedIn(true);
+          if (user) {
+            setCurrentUser(user);
+            setIsLoggedIn(true);
+          } else {
+            setCurrentUser(null);
+            setIsLoggedIn(false);
+            localStorage.removeItem("jwt");
+          }
         })
         .catch((err) => {
-          console.error("Token invalid:", err);
+          console.error("Auth error:", err);
+          setCurrentUser(null);
+          setIsLoggedIn(false);
           localStorage.removeItem("jwt");
         });
+    } else {
+      setIsLoggedIn(false);
+      setCurrentUser(null);
     }
   }, []);
 
-  // const handleCardDelete = () => {
-  //   if (!cardToDelete || !cardToDelete._id) {
-  //     console.error("No valid item selected for deletion.");
-  //     return;
-  //   }
-
-  //   removeItem(cardToDelete._id)
-  //     .then(() => {
-  //       setClothingItems((prevItems) =>
-  //         prevItems.filter((item) => item._id !== cardToDelete._id)
-  //       );
-  //       setCardToDelete(null);
-  //       setIsConfirmModalOpen(false);
-  //       setIsItemModalOpen(false);
-  //     })
-  //     .catch(console.error);
-  // };
-
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
@@ -228,9 +266,10 @@ function App() {
               <Header
                 handleAddClick={handleAddClick}
                 weatherData={weatherData}
-                username={"User name"}
+                username={currentUser?.name || "User"}
                 handleRegisterClick={openRegisterModal}
                 handleLoginClick={openLoginModal}
+                isLoggedIn={isLoggedIn}
               />
               <Routes>
                 <Route
@@ -240,20 +279,24 @@ function App() {
                       weatherData={weatherData}
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
-                      onCardClick={handleCardLike}
+                      onCardLike={handleCardLike}
                     />
                   }
                 />
                 <Route
                   path="/profile"
                   element={
-                    <Profile
-                      onCardClick={handleCardClick}
-                      clothingItems={clothingItems}
-                      handleAddClick={handleAddClick}
-                      username={"User name"}
-                      onSignOut={handleSignOut}
-                    />
+                    <ProtectedRoute isLoggedIn={isLoggedIn}>
+                      <Profile
+                        onCardClick={handleCardClick}
+                        clothingItems={clothingItems}
+                        handleAddClick={handleAddClick}
+                        username={"User name"}
+                        onSignOut={handleSignOut}
+                        updatedUserData={updatedUserData}
+                        handleCardLike={handleCardLike}
+                      />
+                    </ProtectedRoute>
                   }
                 />
               </Routes>
@@ -273,6 +316,7 @@ function App() {
               onDelete={handleDeleteItem}
               setCardToDelete={setCardToDelete}
               setIsConfirmModalOpen={setIsConfirmModalOpen}
+              onCardLike={handleCardLike}
             />
 
             <ConfirmDeleteModal

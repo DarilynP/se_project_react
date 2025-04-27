@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
 function LoginModal({ isOpen, onClose, onLogin }) {
   const [email, setEmail] = useState("");
@@ -7,7 +8,7 @@ function LoginModal({ isOpen, onClose, onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onLogin({ email, password });
+    onLogin({ email, password }); // Delegated login logic
   }
 
   if (!isOpen) return null;
@@ -22,26 +23,37 @@ function LoginModal({ isOpen, onClose, onLogin }) {
       onSubmit={handleSubmit}
       className="login-modal"
     >
-      <form onSubmit={handleSubmit}>
+      <label className="modal__label">
+        Email
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="modal__input"
         />
+      </label>
+
+      <label className="modal__label">
+        Password
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="modal__input"
         />
-        <button type="submit">Login</button>
-        {/* <button type="button" onClick={onClose}>
-          Cancel
-        </button> */}
-      </form>
+      </label>
+      <div className="login__button-wrapper">
+        <button type="button" className="modal__submit">
+           Login
+        </button>
+        <button type="submit" className="login__button">
+          or Sign up
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

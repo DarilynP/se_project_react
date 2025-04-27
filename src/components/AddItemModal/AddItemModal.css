@@ -1,37 +1,3 @@
-/* .modal {
-  width: 496px;
-  height: 436px;
-  border-radius: 20px;
-} */
-
-/* .modal__opened {
-  display: block; Show the modal when this class is added */
-/* } */
-/*
-.modal__content_type_image {
-}
-
-.modal__label {
-}
-
-.modal__label_type_text {
-}
-
-.modal__input {
-}
-
-.modal__input_type_card-name {
-}
-
-.modal__radio_buttons {
-}
-
-.modal__legend {
-}
-
-.modal__radio-input {
-} */
-
-.modal__title{
-  
+.modal__submit{
+  background-color:grey;
 }

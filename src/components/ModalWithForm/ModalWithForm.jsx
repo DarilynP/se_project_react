@@ -22,14 +22,13 @@ function ModalWithForm({
           {/* Close icon or button */}
         </button>
 
-        {/* Children are injected here. The form should be handled by the parent component. */}
-        <div className="modal__form">
-          {children} 
-        </div>
-
-        <button type="submit" className="modal__submit">
-          {buttonText}
-        </button>
+      
+        <form className="modal__form" onSubmit={onSubmit}>
+          {children}
+            <button type="submit" className="modal__submit">
+         {buttonText} 
+          </button> 
+        </form>  
       </div>
     </div>
   );

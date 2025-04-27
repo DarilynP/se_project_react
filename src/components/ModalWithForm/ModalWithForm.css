@@ -1,4 +1,3 @@
-
 .modal {
   font-family: Cabinet Grotesk, sans-serif;
   position: fixed;
@@ -63,7 +62,6 @@
   width: 100%;
   max-height: 436px;
   padding: 28px;
-
 }
 
 .modal__content-container {
@@ -79,6 +77,10 @@
 .modal__form {
   display: flex;
   flex-direction: column;
+}
+
+.modal__label {
+  display: block;
 }
 
 .modal__label_type_radio {
@@ -117,7 +119,7 @@
   border-radius: 4px;
   gap: 8px;
   color: #fff;
-  margin-top: 32px;
+  /* margin-top: 32px; */
   border: none;
   background-color: #000000;
 }
@@ -129,3 +131,13 @@
 .modal__submit:disabled {
   background-color: #a0a0a0; /* Disabled state */
 }
+
+/* .modal__savechanges-button {
+  width: 128px;
+  height: 36px;
+  top: 491px;
+  left: 500px;
+  border-radius: 4px;
+  background-color: black;
+  color: #ffff;
+} */

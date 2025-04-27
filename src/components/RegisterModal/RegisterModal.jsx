@@ -1,62 +1,99 @@
 import React, { useState, useEffect } from "react";
-import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./RegisterModal.css";
 
-function RegisterModal({ isOpen, onClose, onRegister, onLogin, type }) {
+function RegisterModal({ isOpen, onClose, onRegister, onSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
 
-  // Clear inputs when modal is closed
   useEffect(() => {
     if (!isOpen) {
       setEmail("");
       setPassword("");
+      setName("");
+      setAvatar("");
     }
   }, [isOpen]);
 
-  if (!isOpen) return null; // If modal is not open, return nothing
+  if (!isOpen) return null;
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (type === "signup") {
-      onRegister({ email, password });
-    } else if (type === "login") {
-      onLogin({ email, password });
-    }
+    console.log("submitting form with values:", {
+      email,
+      password,
+      name,
+      avatar,
+    });
+    onRegister({ email, password, name, avatar });
   }
 
   return (
     <ModalWithForm
-      title={type === "signup" ? "Sign Up" : "Login"}
+      title="Sign Up"
       name="new-user"
-      buttonText={type === "signup" ? "Register" : "Log In"}
+      buttonText="Register"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <form onSubmit={handleSubmit}>
-        <h2>{type === "signup" ? "Sign up" : "Login"}</h2>
-
+      <label className="modal__label">
+        Email
         <input
           type="email"
           placeholder="Email"
           value={email}
+          className="modal__input"
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+      </label>
+
+      <label className="modal__label">
+        Password
         <input
           type="password"
           placeholder="Password"
           value={password}
+          className="modal__input"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+      </label>
 
-        <button type="submit">{type === "signup" ? "Sign up" : "Login"}</button>
-        <button type="button" onClick={onClose}>
-          Cancel
-        </button>
-      </form>
+      <label className="modal__label">
+        Name
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          className="modal__input"
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        Avatar URL
+        <input
+          type="url"
+          placeholder="Avatar URL"
+          value={avatar}
+          className="modal__input"
+          onChange={(e) => setAvatar(e.target.value)}
+          required
+        />
+      </label>
+      <div className="modal__button-wrapper">
+      <button type="submit" className="modal__submit">
+       Sign up
+      </button>
+      <button type="button" className="modal__button">
+        or Login
+      </button>
+      </div>
     </ModalWithForm>
   );
 }

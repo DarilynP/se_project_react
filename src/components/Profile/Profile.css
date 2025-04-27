@@ -11,11 +11,31 @@
 .profile__clothing-item {
 }
 
-/* .modal__image-profile {
-  border-style: none;
-  border-radius: 10px 10px 0 0;
-  max-width: 100%;
-  height: 436px;
-  display: block;
-  margin: 0 auto;
-} */
+.profile__change-user{
+  border: none;
+  background-color: transparent;
+  margin-top: 8px;
+}
+
+.profile__logout-button {
+  border: none;
+  background-color: transparent;
+  display:flex;
+  margin-top:8px;
+}
+.profile__modal{
+  width: 496px; /* Width as requested */
+  height: 304px; /* Height as requested */
+  position: absolute;
+  top: 259px; /* Position from the top */
+  left: 472px; /* Position from the left */
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px; /* Border radius as requested */
+  border: 1px solid #ccc; /* Border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+

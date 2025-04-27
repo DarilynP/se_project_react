@@ -9,7 +9,11 @@ function ClothesSection({
   weatherData,
   onCardClick,
   handleAddClick,
+  onDelete,
+  handleCardLike,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <div className="clothes-section">
       <div>
@@ -25,6 +29,9 @@ function ClothesSection({
                 key={item._id}
                 item={item}
                 onCardClick={onCardClick} // Pass the onCardClick prop down to ItemCard
+                currentUser={currentUser}
+                onDelete={onDelete}
+                onCardLike={handleCardLike}
               />
             );
           })}

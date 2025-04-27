@@ -1,62 +1,27 @@
-.login-modal .modal__content {
-    position: fixed;
-    top: 259px;
-    left: 472px;
-    width: 496px;
-    height: 304px;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    z-index: 1000;
-  }
-  .modal__content .login-modal{
-    width: 496PX;
-    height: 304px;
-    border-radius: 20px;
-  }
-  
-  /* .modal__content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  } */
-  
-  .modal__header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .login-modal .modal__input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .login-modal .modal__button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  .login-modal .modal__button:hover {
-    background-color: grey;
-  }
-  
-  
-  
-  
+ .modal__submit {
+  height: 36px;
+  /* width: 73px; */
+  background-color: grey;
+}
+
+.modal__submit:hover {
+  background-color: grey;
+}
+
+.login-modal__input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 24px;
+}
+
+/* //sign up button// */
+.login-button {
+  border: none;
+  background-color: transparent;
+}
+
+.login__button {
+  color: grey;
+  background-color: transparent;
+  border: none;
+}

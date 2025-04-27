@@ -1,5 +1,5 @@
+import React, { useContext } from "react";
 import "./ItemModal.css";
-import { useContext } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
 function ItemModal({
@@ -17,6 +17,8 @@ function ItemModal({
   console.log("Card inside ItemModal:", card);
   console.log("Card ID inside ItemModal:", card?._id);
 
+  const currentUser = useContext(CurrentUserContext);
+
   const handleDeleteClick = () => {
     if (!card || !card._id) {
       console.error("Error: Card ID is missing!", card);
@@ -27,6 +29,13 @@ function ItemModal({
     setCardToDelete(card); // Store the card to be deleted
     setIsConfirmModalOpen(true);
   };
+
+  console.log("card:", card);
+  console.log("currentUser:", currentUser);
+  console.log("isOwn:", card?.owner === currentUser?._id);
+
+  const isOwn =
+    card?.owner === currentUser?._id || card?.owner?._id === currentUser?._id;
 
   return (
     <div className={`modal modal_type_image ${isOpen ? "modal__opened" : ""}`}>
@@ -46,7 +55,7 @@ function ItemModal({
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
 
-          {isOwner && (
+          {isOwn && (
             <button
               className="modal__delete-button"
               onClick={handleDeleteClick}

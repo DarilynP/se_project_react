@@ -42,6 +42,7 @@ function Header({
   };
 
   console.log("activeModal", activeModal);
+  console.log("currentUser:", currentUser);
 
   return (
     <header className="header">
@@ -63,7 +64,7 @@ function Header({
           + Add clothes
         </button>
 
-        {currentUser ? (
+        {currentUser.currentUser ? (
           <Link to="/profile" className="header__link">
             <div className="header__profile">
               <div className="header__username">{currentUser.username}</div>
@@ -72,10 +73,10 @@ function Header({
           </Link>
         ) : (
           <>
-            <button type="button" onClick={handleRegisterClick}>
+            <button type="button" onClick={handleRegisterClick} className="signup-button">
               Sign up
             </button>
-            <button onClick={() => handleLoginClick()}>Login</button>
+            <button onClick={() => handleLoginClick()} className="login-button">Login</button>
           </>
         )}
       </div>
