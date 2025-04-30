@@ -107,7 +107,7 @@
 .modal__image {
   border-style: none;
   border-radius: 10px 10px 0 0;
-  max-width: 100%;
+  max-width: 498px;
   height: 496px;
   display: block;
   margin: 0 auto;
@@ -131,13 +131,3 @@
 .modal__submit:disabled {
   background-color: #a0a0a0; /* Disabled state */
 }
-
-/* .modal__savechanges-button {
-  width: 128px;
-  height: 36px;
-  top: 491px;
-  left: 500px;
-  border-radius: 4px;
-  background-color: black;
-  color: #ffff;
-} */

@@ -58,5 +58,15 @@
   gap: 10px;
 }
 
-/* .header__avatar {
-} */
+.header__avatar {
+  height: 40px;
+  width: 40px;
+  border: 1px solid;
+  border-radius:50%;
+}
+
+.header__login-button{
+  border:none;
+  background-color: transparent;
+
+}

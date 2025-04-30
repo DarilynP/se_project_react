@@ -1,12 +1,10 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
-import React from "react";
 import { useContext } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
 function ClothesSection({
   clothingItems,
-  weatherData,
   onCardClick,
   handleAddClick,
   onDelete,

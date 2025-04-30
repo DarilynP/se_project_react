@@ -18,3 +18,12 @@
   margin-left: 20px;
   font-size: 15px;
 }
+
+.clothes__section-modal{
+  width: 498px;
+  height: 610px;
+  top: 106px;
+  left: 471px;
+  border-radius: 16px;
+  position: absolute;
+}

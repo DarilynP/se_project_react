@@ -1,6 +1,6 @@
- .modal__submit {
+.modal__submit {
   height: 36px;
-  /* width: 73px; */
+  Width:73px;
   background-color: grey;
 }
 
@@ -14,6 +14,16 @@
   margin-bottom: 24px;
 }
 
+/* .modal__content{
+    width: 496px;
+    height: 304px;
+    position:relative;
+    border-radius: 20px;
+    background-color: white; /* You can adjust the background color if needed */
+    /* padding: 20px; /* Optional padding inside the modal */
+    /* box-sizing: border-box;
+}  */ */
+
 /* //sign up button// */
 .login-button {
   border: none;
@@ -24,4 +34,8 @@
   color: grey;
   background-color: transparent;
   border: none;
+}
+
+.login__button-wrapper {
+
 }

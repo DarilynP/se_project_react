@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./ItemModal.css";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
 function ItemModal({
   isOpen,
   onClose,
-  onDelete,
   setCardToDelete,
   setIsConfirmModalOpen,
   card,
@@ -39,7 +38,7 @@ function ItemModal({
 
   return (
     <div className={`modal modal_type_image ${isOpen ? "modal__opened" : ""}`}>
-      <div className="modal__content modal__content_type_image">
+      <div className="modal__content-item modal__content_type_image">
         <button
           onClick={onClose}
           type="button"

@@ -1,20 +1,18 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import "./Header.css";
 import logo from "../../assets/Logo.png";
-import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import RegisterModal from "../RegisterModal/RegisterModal"; // Import RegisterModal
+
 
 function Header({
   handleAddClick,
   weatherData,
   handleLoginClick,
-  isLoggedIn,
-  handleRegisterClick,
+handleRegisterClick,
 }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   // State to manage which modal is active
   const [activeModal, setActiveModal] = useState(null);
@@ -24,25 +22,25 @@ function Header({
     day: "numeric",
   });
 
-  // Function to close modal
-  const closeActiveModal = () => {
-    setActiveModal(null);
-  };
+  // // Function to close modal
+  // const closeActiveModal = () => {
+  //   setActiveModal(null);
+  // };
 
-  // Register function
-  const handleRegister = (formData) => {
-    console.log("Registering with data: ", formData);
-    closeActiveModal();
-  };
+  // // Register function
+  // const handleRegister = (formData) => {
+  //   console.log("Registering with data: ", formData);
+  //   closeActiveModal();
+  // };
 
-  // Login function (to be passed to LoginModal)
-  const handleLogin = (formData) => {
-    console.log("Logging in with data: ", formData);
-    closeActiveModal();
-  };
+  // // Login function (to be passed to LoginModal)
+  // const handleLogin = (formData) => {
+  //   console.log("Logging in with data: ", formData);
+  //   closeActiveModal();
+  // };
 
   console.log("activeModal", activeModal);
-  console.log("currentUser:", currentUser);
+  console.log("currentUser:", currentUser );
 
   return (
     <header className="header">
@@ -64,23 +62,28 @@ function Header({
           + Add clothes
         </button>
 
-        {currentUser.currentUser ? (
+        {currentUser ? (
           <Link to="/profile" className="header__link">
             <div className="header__profile">
-              <div className="header__username">{currentUser.username}</div>
-              <img src={avatar} alt="user avatar" className="header__avatar" />
+              <div className="header__username">{currentUser.name}</div>
+              <img src={currentUser.avatar} alt="user avatar" className="header__avatar" />
             </div>
           </Link>
         ) : (
           <>
-            <button type="button" onClick={handleRegisterClick} className="signup-button">
+            <button
+              type="button"
+              onClick={handleRegisterClick}
+              className="signup-button"
+            >
               Sign up
             </button>
-            <button onClick={() => handleLoginClick()} className="login-button">Login</button>
+            <button onClick={() => handleLoginClick()} className="header__login-button">
+              Login
+            </button>
           </>
         )}
       </div>
-
     </header>
   );
 }

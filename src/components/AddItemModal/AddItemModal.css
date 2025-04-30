@@ -1,3 +1,10 @@
-.modal__submit{
-  background-color:grey;
+.modal__submit-garment{
+  background-color:black;
+  width:124px;
+  height: 36px;
+  color: white;
+  border:none;
+  border-radius: 4px;
+  
+
 }

@@ -13,7 +13,7 @@
   border: none;
   background-color: grey;
   color: white;
-  margin-top: 32px;
+  /* margin-top: 32px; */
 }
 
 .modal__submit:hover {

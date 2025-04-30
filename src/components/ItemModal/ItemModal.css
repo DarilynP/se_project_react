@@ -17,23 +17,21 @@
   display: flex;
 }
 
-/* .modal__content {
+
+.modal__content-item{
+  max-height: 610px;
+  padding:0;
   background-color: #fff;
   position: relative;
   box-sizing: border-box;
   border-radius: 20px;
-  height: 610px;
-  max-width: 496px;
-  width: 100%;
-} */
+
+}
 
 .modal__content_type_image {
   max-height: 610px;
   padding: 0;
   overflow: hidden;
-}
-
-.modal_type_image {
 }
 
 .modal__delete-button {
@@ -67,5 +65,3 @@
   cursor: pointer;
 }
 
-.modal__close-item {
-}

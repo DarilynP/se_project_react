@@ -1,5 +1,4 @@
-// src/context/CurrentUserContext.jsx
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const CurrentUserContext = createContext({ currentUser: null, loading: true });
 

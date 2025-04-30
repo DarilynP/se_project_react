@@ -8,3 +8,10 @@
   margin-left: 20px;
   white-space: nowrap;
 }
+
+.sideBar__avatar {
+  height: 40px;
+  width: 40px;
+  border-radius:50%;
+  border:1px solid;
+}

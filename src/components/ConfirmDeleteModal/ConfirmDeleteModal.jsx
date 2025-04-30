@@ -1,4 +1,3 @@
-import React from "react";
 import "./ConfirmDeleteModal.css"; // Import CSS for styling
 
 function ConfirmDeleteModal({ isOpen, onClose, onConfirm, cardToDelete }) {

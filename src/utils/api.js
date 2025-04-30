@@ -82,8 +82,10 @@ export const checkToken = (token) => {
 };
 
 // Handle saving the updated user data
+
 export const handleSaveProfile = (updatedUserData) => {
-  fetch(`http://localhost:3001/users/me`, {
+  console.log("Updating with data:", updatedUserData);
+  return fetch(`http://localhost:3001/users/me`, {
     method: "PATCH",
     body: JSON.stringify(updatedUserData),
     headers: {
@@ -91,7 +93,12 @@ export const handleSaveProfile = (updatedUserData) => {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to update profile");
+      }
+      return res.json(); // Return updated user data
+    })
     .catch((error) => {
       console.error("Error updating profile:", error);
       alert("Something went wrong while updating your profile.");

@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 
-function EditProfileModal({ isOpen, onClose, currentUser, onSave }) {
+function EditProfileModal({
+  onEditProfile,
+  isOpen,
+  onClose,
+  onSave,
+}) {
   const [name, setName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   //  Sync with currentUser when modal is opened or user data changes
   useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name || "");
-      setAvatarUrl(currentUser.avatarUrl || "");
-    }
-  }, [currentUser, isOpen]);
+    if(isOpen) {
+      setName("")
+      setAvatar("")
+
+    } 
+    // THIS CODE PRE-FILL DATA
+    // if (currentUser) {
+      // setName(currentUser.name || "");
+      // setAvatar(currentUser.avatar || "");
+    },
+   [ isOpen]);
 
   const handleSubmit = (e) => {
     console.log(`savings change for:${name}`);
     e.preventDefault();
-    onSave({ name, avatarUrl });
+    onSave({ name, avatar });
   };
 
-  if (!isOpen) return null;
+  // if (!isOpen) return null;
 
   return (
     <ModalWithForm
@@ -28,10 +39,13 @@ function EditProfileModal({ isOpen, onClose, currentUser, onSave }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={"Save Changes"}
+      name="edit__profile"
+      isOpen={isOpen}
     >
-      <label>
+      <label className="modal__label">
         Name:
         <input
+          className="modal__input"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -39,16 +53,19 @@ function EditProfileModal({ isOpen, onClose, currentUser, onSave }) {
           required
         />
       </label>
-      <label>
+      <label className="modal__label">
         Avatar URL:
         <input
+          className="modal__input"
           type="url"
-          value={avatarUrl}
-          onChange={(e) => setAvatarUrl(e.target.value)}
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
           placeholder="Enter avatar URL"
         />
       </label>
-      <button type="submit">Save Changes</button>
+      <button className="edit__modal-submit" onClick={onEditProfile}>
+        Save Changes
+      </button>
     </ModalWithForm>
   );
 }
