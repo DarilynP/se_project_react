@@ -8,11 +8,14 @@ function ItemCard({ item, onCardClick, onCardLike, onDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   console.log("ITEM OWNER:", item.owner);
-  console.log("CURRENT USER ID:", currentUser?.currentUser._id);
+  console.log("CURRENT USER ID:", currentUser ? currentUser._id : "no user loaded yet" );
   console.log("currentUser:", currentUser);
 
-  const isLiked = item.likes?.some((id) => id === currentUser?.currentUser._id);
-  const isOwn = item.owner === currentUser?.currentUser._id;
+  // const isLiked = item.likes?.some((id) => id === currentUser?.currentUser._id);
+  // const isOwn = item.owner === currentUser?.currentUser._id;
+
+  const isLiked = currentUser?.currentUser && item.likes?.some((id) => id === currentUser.currentUser._id);
+  const isOwn = currentUser?.currentUser && item.owner === currentUser.currentUser._id;
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -47,19 +50,6 @@ function ItemCard({ item, onCardClick, onCardLike, onDelete }) {
         onClick={handleCardClick}
       />
       <p className="card__weather">{item.weather?.description}</p>
-
-      {/* // Like button */}
-
-      {/* Like button
-      {currentUser && (
-        <button
-          className={itemLikeButtonClassName}
-          onClick={handleLike}
-          aria-label={isLiked ? "Unlike" : "Like"}
-        >
-          {isLiked ? "Unlike" : "Like"}
-        </button>
-      )} */}
 
       {/* Delete button - only if user owns the item */}
       {isOwn && (

@@ -52,6 +52,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
 
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
