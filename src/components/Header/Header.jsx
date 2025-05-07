@@ -54,6 +54,8 @@ handleRegisterClick,
       </div>
       <div className="header__nav">
         <ToggleSwitch />
+
+        {currentUser && (
         <button
           onClick={handleAddClick}
           type="button"
@@ -61,6 +63,8 @@ handleRegisterClick,
         >
           + Add clothes
         </button>
+        )}
+
 
         {currentUser ? (
           <Link to="/profile" className="header__link">

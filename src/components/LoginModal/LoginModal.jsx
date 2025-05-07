@@ -2,7 +2,7 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onClose, onLogin }) {
+function LoginModal({ isOpen, onClose, onLogin, onSwitchToRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,7 +50,7 @@ function LoginModal({ isOpen, onClose, onLogin }) {
         <button type="button" className="modal__submit">
            Login
         </button>
-        <button type="submit" className="login__button">
+        <button type="submit" className="login__button" onClick={onSwitchToRegister}>
           or Sign up
         </button>
       </div>

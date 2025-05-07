@@ -1,30 +1,30 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "../Hooks/useForm";
+import { useContext } from "react";
+// import { currentUserContext } from '../../context/CurrentUserContext';
 
 export default function AddItemModal({ onClose, isOpen, onAddItem }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
 
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
-  const handleWeatherChange = (e) => setWeather(e.target.value);
+
 
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
+      setValues({ name: "", imageUrl: "", weather: "" });
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newItem = { name, imageUrl, weather };
-    console.log("Adding new item:", newItem);
-    onAddItem(newItem);
+    console.log("Adding new item:", values);
+    onAddItem(values);
   };
 
   return (
@@ -40,26 +40,28 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
         Name{" "}
         <input
           type="text"
+          name="name"
           className="modal__input modal__input_type_card-name"
           id="name"
           placeholder="Name"
           required
           minLength="1"
           maxLength="30"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={values.name}
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
         Image{" "}
         <input
           type="text"
+          name="imageUrl"
           className="modal__input"
           id="imageUrl"
           placeholder="Enter Image URL"
           required
-          onChange={handleImageUrlChange}
-          value={imageUrl}
+          onChange={handleChange}
+          value={values.imageUrl}
         />
       </label>
       <fieldset className="modal__radio-buttons">
@@ -68,11 +70,11 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
           <input
             id="hot"
             type="radio"
-            name="weather type"
+            name="weather"
             value="hot"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-            checked={weather === "hot"}
+            onChange={handleChange}
+            checked={values.weather === "hot"}
           />{" "}
           Hot
         </label>
@@ -80,11 +82,11 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
           <input
             id="warm"
             type="radio"
-            name="weather type"
+            name="weather"
             value="warm"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-            checked={weather === "warm"}
+            onChange={handleChange}
+            checked={values.weather === "warm"}
           />{" "}
           Warm
         </label>
@@ -92,18 +94,20 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
           <input
             id="cold"
             type="radio"
-            name="weather type"
+            name="weather"
             value="cold"
             className="modal__radio-input"
-            onChange={handleWeatherChange}
-            checked={weather === "cold"}
+            onChange={handleChange}
+            checked={values.weather === "cold"}
           />{" "}
           Cold
         </label>
-        <button type= "submit" className="modal__submit-garment">
+      </fieldset>
+   
+        <button type="submit" className="modal__submit-garment">
           Add Garment
         </button>
-      </fieldset>
+    
     </ModalWithForm>
   );
 }

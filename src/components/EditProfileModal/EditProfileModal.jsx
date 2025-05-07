@@ -7,6 +7,7 @@ function EditProfileModal({
   isOpen,
   onClose,
   onSave,
+  currentUser,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -14,16 +15,17 @@ function EditProfileModal({
   //  Sync with currentUser when modal is opened or user data changes
   useEffect(() => {
     if(isOpen) {
-      setName("")
-      setAvatar("")
+      setName(currentUser.name || "");
+      setAvatar(currentUser.avatar || "")
 
     } 
     // THIS CODE PRE-FILL DATA
-    // if (currentUser) {
-      // setName(currentUser.name || "");
-      // setAvatar(currentUser.avatar || "");
-    },
-   [ isOpen]);
+    if (currentUser) {
+      setName(currentUser.name || "");
+      setAvatar(currentUser.avatar || "");
+    }
+  },
+   [ isOpen, currentUser]);
 
   const handleSubmit = (e) => {
     console.log(`savings change for:${name}`);
@@ -63,7 +65,7 @@ function EditProfileModal({
           placeholder="Enter avatar URL"
         />
       </label>
-      <button className="edit__modal-submit" onClick={onEditProfile}>
+      <button type="submit" className="edit__modal-submit">
         Save Changes
       </button>
     </ModalWithForm>

@@ -111,6 +111,7 @@
   height: 496px;
   display: block;
   margin: 0 auto;
+  object-fit: cover;
 }
 
 .modal__submit {

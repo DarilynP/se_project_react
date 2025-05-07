@@ -54,7 +54,7 @@ function ItemModal({
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
 
-          {isOwn && (
+          {currentUser?.currentUser && isOwn && (
             <button
               className="modal__delete-button"
               onClick={handleDeleteClick}

@@ -1,4 +1,4 @@
-import { useContext, useState} from "react";
+import { useContext, useState } from "react";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
@@ -71,22 +71,6 @@ function Profile({
           />
         </section>
       </div>
-
-      {/* change profile data modal */}
-      {isEditModalOpen && (
-        <EditProfileModal
-          currentUser={currentUser}
-          onClose={() => setIsEditModalOpen(false)}
-          onSave={(data) => {
-            handleSaveProfile(data).then((updatedUser) => {
-              if (updatedUser) {
-                setCurrentUser(updatedUser);
-                setIsEditModalOpen(false);
-              }
-            });
-          }}
-        />
-      )}
     </>
   );
 }

@@ -4,23 +4,19 @@ import {
   getItems,
   addItem,
   removeItem,
-  checkToken,
   handleSaveProfile,
-  register,
-  login,
   addCardLike,
   removeCardLike,
-  
 } from "../utils/api";
 import { coordinates, APIkey, defaultClothingItems } from "../utils/constants";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../context/CurrentTemperatureUnit";
 import CurrentUserContext from "../context/CurrentUserContext.jsx";
+import { checkToken, login, register } from "../utils/auth.js";
 
 // Components
 import Header from "./Header/Header";
 import Main from "./Main/Main";
-
 import ItemModal from "./ItemModal/ItemModal";
 import Footer from "./Footer/Footer";
 import AddItemModal from "./AddItemModal/AddItemModal";
@@ -45,17 +41,15 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
   const [cardToDelete, setCardToDelete] = useState(null);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-
   const [currentUser, setCurrentUser] = useState(null);
-
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
+  const handleSwitchToLogin = () => {
+    setActiveModal("login");
+  };
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
@@ -173,7 +167,7 @@ function App() {
     const token = localStorage.getItem("jwt");
     // Check if this card is not currently liked
     if (!isLiked) {
-        addCardLike(id, token)
+      addCardLike(id, token)
         .then((updatedCard) => {
           setClothingItems((cards) =>
             cards.map((item) => (item._id === id ? updatedCard : item))
@@ -336,11 +330,13 @@ function App() {
               onRegister={handleRegister}
               onLogin={handleLogin}
               type={activeModal}
+              onSwitchToLogin={openLoginModal}
             />
             <LoginModal
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
               onLogin={handleLogin}
+              onSwitchToRegister={openRegisterModal}
             />
           </div>
         </BrowserRouter>
