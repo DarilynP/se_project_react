@@ -47,7 +47,7 @@ function LoginModal({ isOpen, onClose, onLogin, onSwitchToRegister }) {
         />
       </label>
       <div className="login__button-wrapper">
-        <button type="button" className="modal__submit">
+        <button type="submit" className="modal__submit">
            Login
         </button>
         <button type="submit" className="login__button" onClick={onSwitchToRegister}>
