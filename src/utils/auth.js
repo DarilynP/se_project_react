@@ -1,9 +1,4 @@
-const baseURL = "http://localhost:3001";
-
-// Reuse shared response checker
-export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-};
+import { baseURL, checkResponse } from "./api";
 
 // Register user
 export const register = ({ name, avatar, email, password }) => {

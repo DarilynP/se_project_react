@@ -51,8 +51,8 @@ function ItemModal({
         />
 
         <div className="modal__footer">
+        <div className="modal__caption-container">
           <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
 
           {currentUser?.currentUser && isOwn && (
             <button
@@ -62,6 +62,8 @@ function ItemModal({
               Delete Item
             </button>
           )}
+          </div>
+          <p className="modal__weather">Weather: {card.weather}</p>
         </div>
       </div>
     </div>

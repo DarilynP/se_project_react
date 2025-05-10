@@ -2,45 +2,30 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 
-function EditProfileModal({
-  onEditProfile,
-  isOpen,
-  onClose,
-  onSave,
-  currentUser,
-}) {
+function EditProfileModal({ onSave, isOpen, onClose, currentUser }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  //  Sync with currentUser when modal is opened or user data changes
+  // Sync with currentUser when modal is opened or user data changes
   useEffect(() => {
-    if(isOpen) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "")
-
-    } 
-    // THIS CODE PRE-FILL DATA
-    if (currentUser) {
+    if (isOpen && currentUser) {
       setName(currentUser.name || "");
       setAvatar(currentUser.avatar || "");
     }
-  },
-   [ isOpen, currentUser]);
+  }, [isOpen, currentUser]);
 
   const handleSubmit = (e) => {
-    console.log(`savings change for:${name}`);
     e.preventDefault();
+    console.log(`Saving changes for: ${name}`);
     onSave({ name, avatar });
   };
-
-  // if (!isOpen) return null;
 
   return (
     <ModalWithForm
       title="Edit Profile"
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={"Save Changes"}
+      // buttonText="Save Changes"
       name="edit__profile"
       isOpen={isOpen}
     >
@@ -65,7 +50,7 @@ function EditProfileModal({
           placeholder="Enter avatar URL"
         />
       </label>
-      <button type="submit" className="edit__modal-submit">
+      <button type="submit" className="modal__submit-btn">
         Save Changes
       </button>
     </ModalWithForm>

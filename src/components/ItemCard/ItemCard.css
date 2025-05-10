@@ -44,10 +44,11 @@
   top: 14px;
   left: 106px;
   right: 0;
-  display:flex;
-
+  display: flex;
 }
 
 .card__like-button {
   margin: 0;
+  border: none;
+  background-color: transparent;
 }

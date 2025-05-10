@@ -1,10 +1,8 @@
-.edit__modal-submit{
-    height: 36px;
-    width: 124px;
-    background-color:black;
-    color:white;
-    border:none;
-    border-radius: 4px;
-
+.modal__submit-btn {
+  height: 36px;
+  width: 124px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
 }
-

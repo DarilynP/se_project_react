@@ -17,15 +17,13 @@
   display: flex;
 }
 
-
-.modal__content-item{
+.modal__content-item {
   max-height: 610px;
-  padding:0;
+  padding: 0;
   background-color: #fff;
   position: relative;
   box-sizing: border-box;
   border-radius: 20px;
-
 }
 
 .modal__content_type_image {
@@ -45,10 +43,12 @@
   border: none;
   display: flex;
   justify-content: right;
-  position: absolute;
-  left: 355px;
-  
+}
 
+.modal__caption-container{
+  display:flex;
+  justify-content: space-between;
+  
 }
 
 .modal__close {
@@ -64,4 +64,3 @@
   background-color: transparent;
   cursor: pointer;
 }
-

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import {
   getItems,
   addItem,
@@ -8,6 +8,7 @@ import {
   addCardLike,
   removeCardLike,
 } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 import { coordinates, APIkey, defaultClothingItems } from "../utils/constants";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../context/CurrentTemperatureUnit";
@@ -46,12 +47,17 @@ function App() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // const navigate = useNavigate();
+
   // const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const handleSwitchToLogin = () => {
     setActiveModal("login");
   };
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
+
+
 
   function handleRegister({ email, password, avatar, name }) {
     console.log("Registering:", email, password);
@@ -195,6 +201,7 @@ function App() {
     localStorage.removeItem("jwt"); // remove the token
     setIsLoggedIn(false); // update state to log out
     setCurrentUser(null); // optional: clear user state
+    navigate("/"); //bring back to home page
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3001";
+export const baseURL = "http://localhost:3001";
 
 // Check response status and parse JSON or reject
 export const checkResponse = (res) => {

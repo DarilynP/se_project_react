@@ -22,22 +22,6 @@ handleRegisterClick,
     day: "numeric",
   });
 
-  // // Function to close modal
-  // const closeActiveModal = () => {
-  //   setActiveModal(null);
-  // };
-
-  // // Register function
-  // const handleRegister = (formData) => {
-  //   console.log("Registering with data: ", formData);
-  //   closeActiveModal();
-  // };
-
-  // // Login function (to be passed to LoginModal)
-  // const handleLogin = (formData) => {
-  //   console.log("Logging in with data: ", formData);
-  //   closeActiveModal();
-  // };
 
   console.log("activeModal", activeModal);
   console.log("currentUser:", currentUser );
