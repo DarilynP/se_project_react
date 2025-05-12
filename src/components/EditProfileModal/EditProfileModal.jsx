@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
+import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
-function EditProfileModal({ onSave, isOpen, onClose, currentUser }) {
+
+function EditProfileModal({ onSave, isOpen, onClose }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 

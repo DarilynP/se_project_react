@@ -48,7 +48,16 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const navigate = useNavigate();
+  const loginRedirect = () =>{
+  const navigate = useNavigate();
+
+  useEffect (() => {
+    if(isloggedIn){
+      navigate('/'); // home page
+    }
+  }, [isLoggedIn , nagivate]);
+  return null;
+  };
 
   // const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const handleSwitchToLogin = () => {
@@ -279,7 +288,7 @@ function App() {
                       clothingItems={clothingItems}
                       onCardLike={handleCardLike}
                     />
-                  }
+                }
                 />
                 <Route
                   path="/profile"

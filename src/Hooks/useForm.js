@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function UseForm(initialValues) {
+export function useForm(initialValues) {
   const [values, setValues] = useState(initialValues);
 
   const handleChange = (event) => {
@@ -11,4 +11,4 @@ export function UseForm(initialValues) {
   return { values, handleChange, setValues };
 }
 
-export default UseForm;
+export default useForm;
