@@ -31,7 +31,6 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
     <ModalWithForm
       title="New Garment"
       name="new-card"
-      buttonText="Add Garment"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

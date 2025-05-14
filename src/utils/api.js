@@ -42,6 +42,7 @@ export const removeItem = (id) => {
 
 // Save updated user profile
 export const handleSaveProfile = (updatedUserData) => {
+  console.log("sending updated user data:", updatedUserData);
   const token = localStorage.getItem("jwt");
   return request(`${baseURL}/users/me`, {
     method: "PATCH",

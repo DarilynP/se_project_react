@@ -3,8 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
-
-function EditProfileModal({ onSave, isOpen, onClose }) {
+function EditProfileModal({ onSave, isOpen, onClose, username, setUsername }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -20,7 +19,14 @@ function EditProfileModal({ onSave, isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Saving changes for: ${name}`);
-    onSave({ name, avatar });
+    onSave({ name, avatar })
+      .then(() => {
+        onClose(); // Close the modal on successful save
+      })
+      .catch((error) => {
+        console.error("Failed to save profile:", error);
+        alert("Error saving profile. Please try again.");
+      });
   };
 
   return (
@@ -28,7 +34,6 @@ function EditProfileModal({ onSave, isOpen, onClose }) {
       title="Edit Profile"
       onClose={onClose}
       onSubmit={handleSubmit}
-      // buttonText="Save Changes"
       name="edit__profile"
       isOpen={isOpen}
     >

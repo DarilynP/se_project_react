@@ -4,7 +4,6 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 import SideBar from "../SideBar/SideBar";
-
 import { handleSaveProfile } from "../../utils/api.js";
 
 function Profile({
@@ -14,30 +13,26 @@ function Profile({
   onSignOut,
   deleteItem,
   handleCardLike,
-  onEditProfile,
+  onEditProfileOpen
 }) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
-  // Ensure these state hooks are always defined
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [username, setUsername] = useState(
-    currentUser ? currentUser.username : ""
-  ); // Handle case where currentUser might be null or undefined
+  // State hooks for modal, username, and avatar
   
-  const [avatar, setAvatar] = useState(currentUser ? currentUser.avatar : "");
+  const [username, setUsername] = useState(currentUser?.username || "");
+  const [avatar, setAvatar] = useState(currentUser?.avatar || "");
 
-  // Handle opening the modal
-  // const handleEditClick = () => {
-  //   setIsEditModalOpen(true);
-  // };
 
+ 
+  // Handle profile save
   const handleProfileSubmit = (e) => {
     e.preventDefault();
-  
+
     handleSaveProfile({ name: username, avatar })
       .then((updatedUser) => {
         if (updatedUser) {
-          setCurrentUser(updatedUser); // Update avatar and name in UI
+          setCurrentUser(updatedUser); // Update user data in the UI
+          closeEditProfileModal(); // Close the modal upon success
           console.log("Profile updated successfully:", updatedUser);
         } else {
           throw new Error("No updated user data returned");
@@ -46,31 +41,23 @@ function Profile({
       .catch((error) => {
         console.error("Error updating profile:", error);
         alert("Failed to update profile. Please try again.");
-      })
-      .finally(() => {
-        setIsEditModalOpen(false); // Always close modal
       });
   };
-  
-
-  // const handleProfileChange = () => {
-  //   setIsProfileModalOpen(true); // Open the profile modal
-  // };
 
   return (
     <>
       <div className="profile">
         <section className="profile__sidebar">
           <SideBar />
-          <button className="profile__change-user" onClick={onEditProfile}>
+          <button
+            className="profile__change-user"
+            onClick={onEditProfileOpen}
+          >
             Change Profile Data
           </button>
-
-          {/* {isLoggedIn && ( */}
           <button className="profile__logout-button" onClick={onSignOut}>
             Sign Out
           </button>
-          {/* )} */}
         </section>
 
         <section className="profile__clothing-item">
@@ -82,6 +69,22 @@ function Profile({
             handleCardLike={handleCardLike}
           />
         </section>
+
+        {/* Edit Profile Modal */}
+        {/* {isEditModalOpen && (
+          <EditProfileModal
+            isOpen={isEditModalOpen}
+            onClose={closeEditProfileModal}
+            onSubmit={handleProfileSubmit}
+            username={username}
+            avatar={avatar}
+            setUsername={setUsername}
+            setAvatar={setAvatar}
+            onSave={() => {
+              console.log("hello");
+            }}
+          />
+        )} */}
       </div>
     </>
   );

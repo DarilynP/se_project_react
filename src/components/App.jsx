@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   getItems,
   addItem,
@@ -47,16 +47,17 @@ function App() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const loginRedirect = () =>{
-  const navigate = useNavigate();
+  const loginRedirect = () => {
+    const navigate = useNavigate();
 
-  useEffect (() => {
-    if(isloggedIn){
-      navigate('/'); // home page
-    }
-  }, [isLoggedIn , nagivate]);
-  return null;
+    useEffect(() => {
+      if (isloggedIn) {
+        navigate("/"); // home page
+      }
+    }, [isLoggedIn, nagivate]);
+    return null;
   };
 
   // const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -65,8 +66,6 @@ function App() {
   };
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
-
-
 
   function handleRegister({ email, password, avatar, name }) {
     console.log("Registering:", email, password);
@@ -129,17 +128,20 @@ function App() {
   //   setActiveModal("sign up");
   // };
 
+
+
   const openLoginModal = () => {
     console.log("login modal triggered");
     setActiveModal("login");
   };
 
-  const onEditProfile = () => {
+  const onEditProfileOpen = () => {
     console.log("I've opened edit profile modal");
     setActiveModal("edit-profile");
-    setName("");
-    setUrl("");
+    setName(currentUser?.name || "");
+    setUrl(currentUser?.name || "");
   };
+
 
   const handleDeleteItem = (id) => {
     if (!id) {
@@ -210,7 +212,21 @@ function App() {
     localStorage.removeItem("jwt"); // remove the token
     setIsLoggedIn(false); // update state to log out
     setCurrentUser(null); // optional: clear user state
-    navigate("/"); //bring back to home page
+    // navigate("/"); //bring back to home page
+  };
+
+  // Handles profile save operation
+  const handleProfileSubmit = ({ name, avatar }) => {
+    return handleSaveProfile({ name, avatar })
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        console.log("Profile updated successfully:", updatedUser);
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.error("Error saving profile:", error);
+        alert("Unable to save profile. Please try again.");
+      });
   };
 
   useEffect(() => {
@@ -288,7 +304,7 @@ function App() {
                       clothingItems={clothingItems}
                       onCardLike={handleCardLike}
                     />
-                }
+                  }
                 />
                 <Route
                   path="/profile"
@@ -302,7 +318,7 @@ function App() {
                         onSignOut={handleSignOut}
                         // updatedUserData={updatedUserData}
                         handleCardLike={handleCardLike}
-                        onEditProfile={onEditProfile}
+                        onEditProfileOpen={onEditProfileOpen}
                       />
                     </ProtectedRoute>
                   }
@@ -314,7 +330,7 @@ function App() {
             <EditProfileModal
               currentUser={currentUser}
               onClose={closeActiveModal}
-              onSave={handleSaveProfile}
+              onSave={handleProfileSubmit}
               isOpen={activeModal === "edit-profile"}
             />
 
