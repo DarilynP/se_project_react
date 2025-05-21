@@ -48,6 +48,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [items, setItems] = useState([]);
 
   const loginRedirect = () => {
     const navigate = useNavigate();
@@ -66,6 +67,8 @@ function App() {
   };
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
+
+
 
   function handleRegister({ email, password, avatar, name }) {
     console.log("Registering:", email, password);
@@ -128,8 +131,6 @@ function App() {
   //   setActiveModal("sign up");
   // };
 
-
-
   const openLoginModal = () => {
     console.log("login modal triggered");
     setActiveModal("login");
@@ -141,7 +142,6 @@ function App() {
     setName(currentUser?.name || "");
     setUrl(currentUser?.name || "");
   };
-
 
   const handleDeleteItem = (id) => {
     if (!id) {
@@ -277,6 +277,26 @@ function App() {
       setCurrentUser(null);
     }
   }, []);
+  useEffect(() => {
+    console.log('useEffect is running');
+  
+    fetch('https://api.devdarilyn.ignorelist.com/items')
+      .then(res => res.text())  
+      .then(text => {
+        console.log('Raw response:', text);
+  
+        try {
+          const data = JSON.parse(text);
+          console.log('Parsed JSON:', data);
+        } catch (err) {
+          console.error('JSON parse error:', err);
+        }
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+      });
+  }, []);
+  
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>

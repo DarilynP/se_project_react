@@ -28,3 +28,8 @@ Currently, two official plugins are available:
 ## Backend Repository
 
 You can find the backend for this project at https://github.com/DarilynP/se_project_express.git
+
+## 📡 Live Demo
+
+You can access the live version of the application here:  
+**[https://devdarilyn.ignorelist.com/](https://devdarilyn.ignorelist.com/)**

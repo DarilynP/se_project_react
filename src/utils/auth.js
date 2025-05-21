@@ -1,4 +1,10 @@
-import { baseURL, checkResponse } from "./api";
+import { checkResponse } from "./api";
+
+import { baseURL } from './config';
+
+export const baseUrl = process.env.NODE_ENV === "production" 
+  ? "https://api.devdarilyn.ignorelist.com"
+  : "http://localhost:3001";
 
 // Register user
 export const register = ({ name, avatar, email, password }) => {

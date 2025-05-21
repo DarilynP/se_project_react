@@ -1,4 +1,6 @@
-export const baseURL = "http://localhost:3001";
+export const baseUrl = process.env.NODE_ENV === "production" 
+  ? "https://api.devdarilyn.ignorelist.com"
+  : "http://localhost:3001";
 
 // Check response status and parse JSON or reject
 export const checkResponse = (res) => {
@@ -12,13 +14,13 @@ function request(url, options) {
 
 // Get all items
 export const getItems = () => {
-  return request(`${baseURL}/items`);
+  return request(`${baseUrl}/items`);
 };
 
 // Add a new item
 export const addItem = (item) => {
   const token = localStorage.getItem("jwt");
-  return request(`${baseURL}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +33,7 @@ export const addItem = (item) => {
 // Delete an item
 export const removeItem = (id) => {
   const token = localStorage.getItem("jwt");
-  return request(`${baseURL}/items/${id}`, {
+  return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +46,7 @@ export const removeItem = (id) => {
 export const handleSaveProfile = (updatedUserData) => {
   console.log("sending updated user data:", updatedUserData);
   const token = localStorage.getItem("jwt");
-  return request(`${baseURL}/users/me`, {
+  return request(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +58,7 @@ export const handleSaveProfile = (updatedUserData) => {
 
 // Like a card
 export const addCardLike = (id, token) => {
-  return request(`${baseURL}/items/${id}/likes`, {
+  return request(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +69,7 @@ export const addCardLike = (id, token) => {
 
 // Unlike a card
 export const removeCardLike = (id, token) => {
-  return request(`${baseURL}/items/${id}/likes`, {
+  return request(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
